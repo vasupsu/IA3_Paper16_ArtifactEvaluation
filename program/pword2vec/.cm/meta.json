@@ -1,0 +1,41 @@
+{
+  "backup_data_uid": "838b3fef1a912e63", 
+  "build_compiler_vars": {
+    "USE_MKL": ""
+  }, 
+  "compile_deps": {
+    "compiler": {
+      "local": "yes", 
+      "name": "C++ compiler", 
+      "tags": "compiler,lang-cpp,icc"
+    }
+  }, 
+  "compiler_env": "CK_CXX", 
+  "data_name": "pword2vec", 
+  "main_language": "c", 
+  "process_in_tmp": "yes", 
+  "program": "yes", 
+  "run_cmds": {
+    "default": {
+      "ignore_return_code": "no", 
+      "run_time": {
+        "run_cmd_main": "numactl --interleave=all $#BIN_FILE#$ -train  $#src_path#$text8 -output vectors.txt -size 100 -window 8 -negative 5 -sample 1e-4 -threads 24 -binary 0 -iter 10 -min-count 5 -batch-size 17" , 
+        "run_input_files": [
+          "text8"
+        ], 
+        "run_output_files": [
+          "tmp-output.tmp"
+        ]
+      }
+    }
+  }, 
+  "source_files": [
+    "pWord2Vec.cpp"
+  ], 
+  "tags": [
+    "demo", 
+    "program", 
+    "lang-cpp"
+  ], 
+  "target_file": "pWord2Vec"
+}
