@@ -1,0 +1,32 @@
+{
+  "check_exit_status": "yes",
+  "customize": {
+    "extra_dir": "",
+    "force_ask_path": "yes",
+    "install_env": {
+      "PACKAGE_NAME": "text8.zip",
+      "PACKAGE_SKIP_LINUX_MAKE": "YES",
+      "PACKAGE_UNGZIP": "NO",
+      "PACKAGE_URL": "http://mattmahoney.net/dc",
+      "PACKAGE_WGET": "YES",
+      "PACKAGE_WGET_EXTRA": "-O text8.gz"
+    },
+    "no_os_in_suggested_path": "yes",
+    "no_ver_in_suggested_path": "yes",
+    "version": "1.0"
+  },
+  "end_full_path": {
+    "linux": "text8"
+  },
+  "process_script": "install",
+  "soft_uoa": "539e7740fcaa8ec1",
+  "suggested_path": "dataset-text8",
+  "tags": [
+    "dataset",
+    "text8"
+  ],
+  "use_scripts_from_another_entry": {
+    "data_uoa": "cd9ccc74060b3d18",
+    "module_uoa": "script"
+  }
+}
