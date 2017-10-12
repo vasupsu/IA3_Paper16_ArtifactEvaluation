@@ -1,0 +1,25 @@
+{
+  "actions": {
+    "run_expt": {}
+  },
+  "copyright": " ",
+  "desc": "Experimental workflow to verify results in Figure 5a",
+  "developer": " ",
+  "developer_email": " ",
+  "developer_webpage": " ",
+  "license": " ",
+  "module_deps": {
+    "env": "9b9b3208ac44b891",
+    "graph": "2d41f89bcf32d4d4",
+    "platform": "707ccdfe444cafac",
+    "program": "b0ac08fe1d3c2615",
+    "result": "4cd2850867df4241",
+    "results": "4cd2850867df4241",
+    "wfe": "1e4e644996b7f2a0"
+  },
+  "programs_uoa": {
+    "pword2vec": "838b3fef1a912e63",
+    "word2vec": "b9dbe451591cbba4",
+    "pSGNScc": "7399410dbd4f3b20"
+  }
+}
