@@ -1,4 +1,4 @@
-This is a [CK](https://cKnowledge.org) repository for [pWord2Vec](https://github.com/vasupsu/pWord2Vec) project.
+This is a [CK](http://cKnowledge.org) repository for [pWord2Vec](https://github.com/vasupsu/pWord2Vec) project.
 
 ## Pre-requisites
 
