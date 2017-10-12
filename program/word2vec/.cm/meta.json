@@ -24,6 +24,10 @@
     "default": {
       "ignore_return_code": "no",
       "run_time": {
+        "post_process_cmds": [
+          "python $#ck_take_from_{b9dbe451591cbba4}#$process.py"
+        ],
+        "post_process_via_ck": "yes",
         "run_cmd_main": "numactl --interleave=all $#BIN_FILE#$ -train  $<<CK_ENV_DATASET_WORDS_FULL_NAME>>$ -output $<<CK_OUTPUT>>$ -size $<<CK_SIZE>>$ -window $<<CK_WINDOW>>$ -negative $<<CK_NEGATIVE>>$ -sample $<<CK_SAMPLE>>$ -threads $<<CK_THREADS>>$ -binary $<<CK_BINARY>>$ -iter $<<CK_ITER>>$ -min-count $<<CK_MIN_COUNT>>$ -cbow 0",
         "run_input_files": [
           "text8"

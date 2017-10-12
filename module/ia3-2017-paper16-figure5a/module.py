@@ -67,11 +67,14 @@ def run_expt(i):
                  'speed':'yes'})
     if r['return']>0: return r
 
+    oo=[]
     r=ck.access({'action':'run',
                      'module_uoa':cfg['module_deps']['program'],
                      'data_uoa':cfg['programs_uoa']['pword2vec'],
-                     'env':{'CK_OUTPUT':'vectors.txt'}})
+                     'env':{'CK_OUTPUT':'vectors.txt'},
+                     'out':oo})
     if r['return']>0: return r
-    cmd=json.dumps(r, indent=2)
-    ck.out(cmd)
+    import json
+    cmd=json.dumps(oo, indent=2)
+    ck.out('ooooo:' +cmd)
     return {'return':0}
