@@ -18,11 +18,13 @@
   "end_full_path": {
     "linux": "text8"
   },
+  "package_extra_name": " (text8)",
   "process_script": "install",
-  "soft_uoa": "539e7740fcaa8ec1",
+  "soft_uoa": "85fc68106b24337a",
   "suggested_path": "dataset-text8",
   "tags": [
     "dataset",
+    "words",
     "text8"
   ],
   "use_scripts_from_another_entry": {

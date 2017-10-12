@@ -5,6 +5,11 @@
   "data_name": "IA3_Paper16_ArtifactEvaluation",
   "dict": {
     "shared": "git",
-    "url": "https://github.com/vasupsu/IA3_Paper16_ArtifactEvaluation"
+    "url": "https://github.com/vasupsu/IA3_Paper16_ArtifactEvaluation",
+    "repo_deps": [
+      {
+        "repo_uoa": "ck-autotuning"
+      }
+    ] 
   }
 }

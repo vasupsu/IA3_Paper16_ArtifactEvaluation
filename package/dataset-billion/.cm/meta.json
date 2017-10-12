@@ -1,10 +1,10 @@
 {
   "check_exit_status": "yes",
+  "comment": "CAREFUL - requires ~6GB of free space",
   "customize": {
     "extra_dir": "",
     "force_ask_path": "yes",
-    "install_env": {
-    },
+    "install_env": {},
     "no_os_in_suggested_path": "yes",
     "no_ver_in_suggested_path": "yes",
     "version": "1.0"
@@ -12,11 +12,13 @@
   "end_full_path": {
     "linux": "1b"
   },
+  "package_extra_name": " (1 billion)",
   "process_script": "install",
   "soft_uoa": "85fc68106b24337a",
   "suggested_path": "dataset-billion",
   "tags": [
     "dataset",
+    "words",
     "billion"
   ]
 }

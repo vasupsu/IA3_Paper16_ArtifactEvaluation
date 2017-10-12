@@ -1,21 +1,21 @@
 {
-  "backup_data_uid": "b9dbe451591cbba4", 
-  "backup_module_uid": "b0ac08fe1d3c2615", 
-  "backup_module_uoa": "program", 
+  "backup_data_uid": "b9dbe451591cbba4",
+  "backup_module_uid": "b0ac08fe1d3c2615",
+  "backup_module_uoa": "program",
   "control": {
-    "author": "Grigori Fursin", 
-    "author_email": "Grigori.Fursin@cTuning.org", 
-    "author_webpage": "http://fursin.net", 
-    "copyright": "See CK COPYRIGHT.txt for copyright details", 
-    "engine": "CK", 
-    "iso_datetime": "2017-10-11T21:37:19.392637", 
-    "license": "See CK LICENSE.txt for licensing details", 
+    "author": "Grigori Fursin",
+    "author_email": "Grigori.Fursin@cTuning.org",
+    "author_webpage": "http://fursin.net",
+    "copyright": "See CK COPYRIGHT.txt for copyright details",
+    "engine": "CK",
+    "iso_datetime": "2017-10-11T21:37:19.392637",
+    "license": "See CK LICENSE.txt for licensing details",
     "version": [
-      "1", 
-      "9", 
-      "2", 
+      "1",
+      "9",
+      "2",
       "1"
     ]
-  }, 
+  },
   "data_name": "word2vec"
 }

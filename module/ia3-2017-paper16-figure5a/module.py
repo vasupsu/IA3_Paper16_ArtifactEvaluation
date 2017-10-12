@@ -46,16 +46,8 @@ def run_expt(i):
 
     """
 
-    ck.out('TBD: action description')
+    ck.out('Reproducing results for Figure 5a ...')
 
-    ck.out('')
-    ck.out('Command line: ')
-    ck.out('')
-
-    import json
-    cmd=json.dumps(i, indent=2)
-
-    ck.out(cmd)
     r=ck.access({'action':'load',
                  'module_uoa':cfg['module_deps']['program'],
                  'data_uoa':cfg['programs_uoa']['pword2vec']})

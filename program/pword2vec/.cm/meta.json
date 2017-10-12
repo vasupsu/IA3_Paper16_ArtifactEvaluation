@@ -24,7 +24,11 @@
     "default": {
       "ignore_return_code": "no",
       "run_time": {
-        "run_cmd_main": "numactl --interleave=all $#BIN_FILE#$ -train  $<<CK_ENV_DATASET_TEXT8_FULL_NAME>>$ -output $<<CK_OUTPUT>>$ -size $<<CK_SIZE>>$ -window $<<CK_WINDOW>>$ -negative $<<CK_NEGATIVE>>$ -sample $<<CK_SAMPLE>>$ -threads $<<CK_THREADS>>$ -binary $<<CK_BINARY>>$ -iter $<<CK_ITER>>$ -min-count $<<CK_MIN_COUNT>>$ -batch-size $<<CK_BATCH_SIZE>>$",
+        "post_process_cmds": [
+          "python $#ck_take_from_{b9dbe451591cbba4}#$process.py"
+        ],
+        "post_process_via_ck": "yes",
+        "run_cmd_main": "numactl --interleave=all $#BIN_FILE#$ -train  $<<CK_ENV_DATASET_WORDS_FULL_NAME>>$ -output $<<CK_OUTPUT>>$ -size $<<CK_SIZE>>$ -window $<<CK_WINDOW>>$ -negative $<<CK_NEGATIVE>>$ -sample $<<CK_SAMPLE>>$ -threads $<<CK_THREADS>>$ -binary $<<CK_BINARY>>$ -iter $<<CK_ITER>>$ -min-count $<<CK_MIN_COUNT>>$ -batch-size $<<CK_BATCH_SIZE>>$",
         "run_input_files": [
           "text8"
         ]
@@ -32,33 +36,26 @@
     }
   },
   "run_deps": {
-    "dataset-text8l": {
-      "force_target_as_host": "yes", 
-      "local": "yes", 
-      "name": "Dataset text8", 
-      "sort": 40, 
-      "tags": "dataset,text8"
-    },
-    "dataset-billion": {
-      "force_target_as_host": "yes", 
-      "local": "yes", 
-      "name": "Dataset billion", 
-      "sort": 40, 
-      "tags": "dataset,billion"
+    "dataset-words": {
+      "force_target_as_host": "yes",
+      "local": "yes",
+      "name": "words dataset",
+      "sort": 40,
+      "tags": "dataset,words"
     }
-  }, 
+  },
   "run_vars": {
-    "CK_SIZE":"100",
-    "CK_WINDOW": "8",
+    "CK_BATCH_SIZE": "17",
+    "CK_BINARY": "0",
+    "CK_ITER": "10",
+    "CK_MIN_COUNT": "5",
     "CK_NEGATIVE": "5",
-    "CK_SAMPLE":"1e-4",
-    "CK_THREADS":"24",
-    "CK_BINARY":"0",
-    "CK_ITER":"10",
-    "CK_MIN_COUNT":"5",
-    "CK_BATCH_SIZE":"17",
-    "CK_OUTPUT": "vectors.txt"
-  }, 
+    "CK_OUTPUT": "vectors.txt",
+    "CK_SAMPLE": "1e-4",
+    "CK_SIZE": "100",
+    "CK_THREADS": "24",
+    "CK_WINDOW": "8"
+  },
   "skip_bin_ext": "yes",
   "tags": [
     "demo",
