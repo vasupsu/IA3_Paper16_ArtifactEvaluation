@@ -1,0 +1,41 @@
+{
+  "customize": {
+    "extra_dir": "",
+    "git_src_dir": "src",
+    "install_env": {
+      "PACKAGE_AUTOGEN": "NO",
+      "PACKAGE_GIT": "NO",
+      "PACKAGE_UNZIP": "YES",
+      "PACKAGE_WGET": "YES",
+      "PACKAGE_SKIP_LINUX_MAKE": "YES",
+      "PACKAGE_NAME": "688addd64ca2.zip",
+      "PACKAGE_URL": "https://bitbucket.org/omerlevy/hyperwords/get"
+    },
+    "use_git_revision": "yes",
+    "version": "master"
+  },
+  "end_full_path": {
+    "linux": "omerlevy-hyperwords-688addd64ca2/hyperwords/corpus2sgns_params.py",
+    "win": "omerlevy-hyperwords-688addd64ca2\\hyperwords\\corpus2sgns_params.py"
+  },
+  "only_for_host_os_tags": [
+    "windows",
+    "linux"
+  ],
+  "only_for_target_os_tags": [
+    "windows",
+    "linux"
+  ],
+  "process_script": "install",
+  "soft_uoa": "b0484885f4b23d0a",
+  "suggested_path": "tool-hyperwords",
+  "tags": [
+    "tool",
+    "hyperwords",
+    "vmaster"
+  ],
+  "use_scripts_from_another_entry": {
+    "data_uoa": "cd9ccc74060b3d18",
+    "module_uoa": "script"
+  }
+}

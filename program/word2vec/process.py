@@ -34,6 +34,14 @@ def ck_postprocess(i):
     env=i['env']
     deps=i['deps']
 
+    # Path to hyperwords
+    ph=deps['tool-hyperwords']
+    ph_env=ph.get('dict',{}).get('env',{})
+
+    ph_path=ph_env.get('CK_ENV_TOOL_HYPERWORDS_LIB','')
+
+    ck.out('path to hyperwords: '+ph_path)
+
     return {'return':0}
 
 # Do not add anything here!

@@ -36,6 +36,13 @@
     }
   },
   "run_deps": {
+    "tool-hyperwords": {
+      "force_target_as_host": "yes",
+      "local": "yes",
+      "name": "hyperwords",
+      "sort": 30,
+      "tags": "tool,hyperwords"
+    },
     "dataset-words": {
       "force_target_as_host": "yes",
       "local": "yes",
