@@ -1,0 +1,72 @@
+{
+  "backup_data_uid": "7399410dbd4f3b20", 
+  "build_compiler_vars": {
+    "USE_MKL": ""
+  }, 
+  "compile_cmds": {
+    "default": {
+      "cmd": "../ck-compile$#script_ext#$"
+    }
+  }, 
+  "compile_deps": {
+    "compiler": {
+      "local": "yes", 
+      "name": "C++ compiler", 
+      "tags": "compiler,lang-cpp,icc"
+    }
+  }, 
+  "compiler_env": "CK_CXX", 
+  "data_name": "pSGNScc", 
+  "main_language": "c", 
+  "process_in_tmp": "yes", 
+  "program": "yes", 
+  "run_cmds": {
+    "default": {
+      "ignore_return_code": "no", 
+      "run_time": {
+        "run_cmd_main": "numactl --interleave=all $#BIN_FILE#$ -train  $<<CK_ENV_DATASET_TEXT8_FULL_NAME>>$ -output $<<CK_OUTPUT>>$ -size $<<CK_SIZE>>$ -window $<<CK_WINDOW>>$ -negative $<<CK_NEGATIVE>>$ -sample $<<CK_SAMPLE>>$ -threads $<<CK_THREADS>>$ -binary $<<CK_BINARY>>$ -iter $<<CK_ITER>>$ -min-count $<<CK_MIN_COUNT>>$ -batch-size $<<CK_BATCH_SIZE>>$ -C $<<CK_C>>$ -T $<<CK_T>>$", 
+        "run_input_files": [
+          "text8"
+        ]
+      }
+    }
+  }, 
+  "run_deps": {
+    "dataset-billion": {
+      "force_target_as_host": "yes", 
+      "local": "yes", 
+      "name": "Dataset billion", 
+      "sort": 40, 
+      "tags": "dataset,billion"
+    }, 
+    "dataset-text8l": {
+      "force_target_as_host": "yes", 
+      "local": "yes", 
+      "name": "Dataset text8", 
+      "sort": 40, 
+      "tags": "dataset,text8"
+    }
+  }, 
+  "run_vars": {
+    "CK_BATCH_SIZE": "17", 
+    "CK_BINARY": "0", 
+    "CK_ITER": "10", 
+    "CK_MIN_COUNT": "5", 
+    "CK_NEGATIVE": "5", 
+    "CK_SAMPLE": "1e-4", 
+    "CK_SIZE": "100", 
+    "CK_THREADS": "24", 
+    "CK_WINDOW": "8",
+    "CK_C": "8",
+    "CK_T": "500000",
+    "CK_OUTPUT": "vectors.txt"
+  }, 
+  "skip_bin_ext": "yes", 
+  "tags": [
+    "demo", 
+    "program", 
+    "lang-cpp"
+  ], 
+  "target_file": "pSGNScc", 
+  "use_compile_script": "yes"
+}

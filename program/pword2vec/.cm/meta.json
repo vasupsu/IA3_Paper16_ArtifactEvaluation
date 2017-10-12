@@ -24,7 +24,7 @@
     "default": {
       "ignore_return_code": "no",
       "run_time": {
-        "run_cmd_main": "numactl --interleave=all $#BIN_FILE#$ -train  $<<CK_ENV_DATASET_TEXT8_FULL_NAME>>$ -output vectors.txt -size $<<CK_SIZE>>$ -window $<<CK_WINDOW>>$ -negative $<<CK_NEGATIVE>>$ -sample $<<CK_SAMPLE>>$ -threads $<<CK_THREADS>>$ -binary $<<CK_BINARY>>$ -iter $<<CK_ITER>>$ -min-count $<<CK_MIN_COUNT>>$ -batch-size $<<CK_BATCH_SIZE>>$",
+        "run_cmd_main": "numactl --interleave=all $#BIN_FILE#$ -train  $<<CK_ENV_DATASET_TEXT8_FULL_NAME>>$ -output $<<CK_OUTPUT>>$ -size $<<CK_SIZE>>$ -window $<<CK_WINDOW>>$ -negative $<<CK_NEGATIVE>>$ -sample $<<CK_SAMPLE>>$ -threads $<<CK_THREADS>>$ -binary $<<CK_BINARY>>$ -iter $<<CK_ITER>>$ -min-count $<<CK_MIN_COUNT>>$ -batch-size $<<CK_BATCH_SIZE>>$",
         "run_input_files": [
           "text8"
         ]
@@ -38,10 +38,17 @@
       "name": "Dataset text8", 
       "sort": 40, 
       "tags": "dataset,text8"
+    },
+    "dataset-billion": {
+      "force_target_as_host": "yes", 
+      "local": "yes", 
+      "name": "Dataset billion", 
+      "sort": 40, 
+      "tags": "dataset,billion"
     }
   }, 
   "run_vars": {
-    "CK_SIZE":"10",
+    "CK_SIZE":"100",
     "CK_WINDOW": "8",
     "CK_NEGATIVE": "5",
     "CK_SAMPLE":"1e-4",
@@ -49,7 +56,8 @@
     "CK_BINARY":"0",
     "CK_ITER":"10",
     "CK_MIN_COUNT":"5",
-    "CK_BATCH_SIZE":"17"
+    "CK_BATCH_SIZE":"17",
+    "CK_OUTPUT": "vectors.txt"
   }, 
   "skip_bin_ext": "yes",
   "tags": [
