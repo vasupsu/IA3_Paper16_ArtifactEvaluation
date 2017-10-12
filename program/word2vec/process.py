@@ -34,8 +34,6 @@ def ck_postprocess(i):
     env=i['env']
     deps=i['deps']
 
-    raw_input('xyz')
-
     return {'return':0}
 
 # Do not add anything here!
