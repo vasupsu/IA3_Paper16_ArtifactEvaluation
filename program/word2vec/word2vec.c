@@ -569,7 +569,7 @@ void TrainModel() {
       printf ("output_time file cannot be created\n");
       return;
   }
-  fprintf (fpOut, "%lf sec\n", /*((real)(now - start + 1) / (real)CLOCKS_PER_SEC)*/ (double)elapsed/1000000); 
+  fprintf (fpOut, "%lf\n", /*((real)(now - start + 1) / (real)CLOCKS_PER_SEC)*/ (double)elapsed/1000000); 
   fclose (fpOut);
 
   fo = fopen(output_file, "wb");

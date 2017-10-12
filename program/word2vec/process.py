@@ -1,39 +1,23 @@
 #
-# Copyright (c) 2017 cTuning foundation.
-# See CK COPYRIGHT.txt for copyright details.
-#
-# SPDX-License-Identifier: BSD-3-Clause.
-# See CK LICENSE.txt for licensing details.
-#
-# Convert raw output to CK format
-#
-# Developer(s):
-#   - Grigori Fursin, cTuning foundation, 2017
+# Postprocessing program and converting
+# raw output to the CK timing format.
 #
 
 import json
 import os
 import re
-import struct
 
-
-# Dummy (just for example)
-def ck_preprocess(i):
-    ck=i['ck_kernel']
-    rt=i['run_time']
-
-    meta=i['meta']
-    env=i['env']
-
-    return {'return':0}
-
-# Postprocess stdout/stderr and convert to CK format (dummy)
 def ck_postprocess(i):
+
     ck=i['ck_kernel']
-    rt=i['run_time']
-    env=i['env']
-    deps=i['deps']
 
-    return {'return':0}
+    cc={}
+    ck.out ('in ck_postprocess word2vec')
+    # Load output as list.
+    r=ck.load_text_file({'text_file':'word2vec_time','split_to_list':'yes'})
+    if r['return']>0: return r
+#    ck.out (r['string'])
+    r1=r['lst'][0].split(' ')
+    cc['execution_time']=r1[0]
 
-# Do not add anything here!
+    return {'return':0, 'characteristics':cc}

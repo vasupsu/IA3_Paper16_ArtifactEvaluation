@@ -12,9 +12,9 @@ def ck_postprocess(i):
     ck=i['ck_kernel']
 
     cc={}
-    ck.out ('in ck_postprocess pword2vec')
+    ck.out ('in ck_postprocess pSGNScc')
     # Load output as list.
-    r=ck.load_text_file({'text_file':'pWord2Vec_time','split_to_list':'yes'})
+    r=ck.load_text_file({'text_file':'pSGNScc_time','split_to_list':'yes'})
     if r['return']>0: return r
 #    ck.out (r['string'])
     r1=r['lst'][0].split(' ')
