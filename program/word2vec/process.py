@@ -13,12 +13,12 @@ def ck_postprocess(i):
 
     cc={}
     # Path to hyperwords
-    ph=deps['tool-hyperwords']
-    ph_env=ph.get('dict',{}).get('env',{})
+#    ph=deps['tool-hyperwords']
+#    ph_env=ph.get('dict',{}).get('env',{})
 
-    ph_path=ph_env.get('CK_ENV_TOOL_HYPERWORDS_LIB','')
+#    ph_path=ph_env.get('CK_ENV_TOOL_HYPERWORDS_LIB','')
 
-    ck.out('path to hyperwords: '+ph_path)
+#    ck.out('path to hyperwords: '+ph_path)
     ck.out ('in ck_postprocess word2vec')
     # Load output as list.
     r=ck.load_text_file({'text_file':'word2vec_time','split_to_list':'yes'})

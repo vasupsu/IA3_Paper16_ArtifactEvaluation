@@ -128,14 +128,19 @@ def run_expt(i):
 
     data_no = 0
     for ds in datasets:
+        dataset_uid=ds['data_uid']
+        dataset_name=ds.get('meta',{}).get('env',{}).get('CK_ENV_DATASET_WORDSNAME','')
+        if (dataset_name=="1b" ):
+            data_no = 1
+        else:
+            data_no = 0
         run_no = 0
         for threads in result[0]['threads']:
-            ck.out ("Threads "+'str(threads)')
+#            if (threads < 16):
+#                run_no = run_no + 1
+#                continue
+            ck.out ("Threads "+str(threads))
 
-            dataset_uid=ds['data_uid']
-    
-            dataset_name=ds.get('meta',{}).get('env',{}).get('CK_ENV_DATASET_WORDSNAME','')
-    
             ck.out('')
             ck.out('Run with data set: '+dataset_name+' ('+dataset_uid+')')
             ck.out('')
@@ -143,26 +148,40 @@ def run_expt(i):
             preset_deps={}
             preset_deps['dataset-words']=dataset_uid # force using this env
     
-#            r=ck.access({'action':'run',
-#                        'module_uoa':cfg['module_deps']['program'],
-#                        'data_uoa':cfg['programs_uoa']['word2vec'],
-#                        'env':{'CK_THREADS':threads},
-#                        'preset_deps':preset_deps})
-#            if r['return']>0: return r
-    
-#            ch=r.get('characteristics',{})
-#            if ch.get('run_success','')!='yes':
-#                return {'return':1, 'error':'execution failed ('+ch.get('fail_reason','')+')'}
-    
-#            result[data_no]['word2vec'][run_no] = ch.get('execution_time','')
-#            cmd=json.dumps(ch, indent=2)
-#            ck.out(cmd)
-    
-            r=ck.access({'action':'run',
+#            if (data_no==0):
+            if (data_no==0):
+                r=ck.access({'action':'run',
+                        'module_uoa':cfg['module_deps']['program'],
+                        'data_uoa':cfg['programs_uoa']['word2vec'],
+                        'env':{'CK_THREADS':threads},
+                        'preset_deps':preset_deps})
+            else:
+                r=ck.access({'action':'run',
+                        'module_uoa':cfg['module_deps']['program'],
+                        'data_uoa':cfg['programs_uoa']['word2vec'],
+                        'env':{'CK_WINDOW':'5', 'CK_SIZE':'300', 'CK_THREADS':threads, 'CK_ITER':'1', 'CK_MIN_COUNT':'2'},
+                        'preset_deps':preset_deps})
+            if r['return']>0: return r
+   
+            ch=r.get('characteristics',{})
+            if ch.get('run_success','')!='yes':
+                return {'return':1, 'error':'execution failed ('+ch.get('fail_reason','')+')'}
+   
+            result[data_no]['word2vec'][run_no] = ch.get('execution_time','')
+            cmd=json.dumps(ch, indent=2)
+            ck.out(cmd)
+   
+            if (data_no==0):
+                r=ck.access({'action':'run',
                         'module_uoa':cfg['module_deps']['program'],
                         'data_uoa':cfg['programs_uoa']['pword2vec'],
-                        'env':{'CK_OUTPUT':'vectors.txt'},
                         'env':{'CK_THREADS':threads},
+                        'preset_deps':preset_deps})
+            else:
+                r=ck.access({'action':'run',
+                        'module_uoa':cfg['module_deps']['program'],
+                        'data_uoa':cfg['programs_uoa']['pword2vec'],
+                        'env':{'CK_WINDOW':'5', 'CK_SIZE':'300', 'CK_THREADS':threads, 'CK_ITER':'1', 'CK_MIN_COUNT':'2', 'CK_BATCH_SIZE':'11'},
                         'preset_deps':preset_deps})
             if r['return']>0: return r
     
@@ -174,11 +193,17 @@ def run_expt(i):
             cmd=json.dumps(ch, indent=2)
             ck.out(cmd)
     
-            r=ck.access({'action':'run',
+            if (data_no==0):
+                r=ck.access({'action':'run',
                         'module_uoa':cfg['module_deps']['program'],
                         'data_uoa':cfg['programs_uoa']['pSGNScc'],
-                        'env':{'CK_OUTPUT':'vectors.txt'},
                         'env':{'CK_THREADS':threads},
+                        'preset_deps':preset_deps})
+            else:
+                r=ck.access({'action':'run',
+                        'module_uoa':cfg['module_deps']['program'],
+                        'data_uoa':cfg['programs_uoa']['pSGNScc'],
+                        'env':{'CK_WINDOW':'5', 'CK_SIZE':'300', 'CK_THREADS':threads, 'CK_ITER':'1', 'CK_MIN_COUNT':'2', 'CK_BATCH_SIZE':'11'},
                         'preset_deps':preset_deps})
             if r['return']>0: return r
     
@@ -191,8 +216,7 @@ def run_expt(i):
             result[data_no]['pSGNScc'][run_no] = ch.get('execution_time','')
     
             run_no = run_no + 1
-        data_no = data_no + 1
-        break
+#        data_no = data_no + 1
     cmd=json.dumps(result, indent=2)
     ck.out(cmd)
 

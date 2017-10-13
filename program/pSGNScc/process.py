@@ -25,5 +25,6 @@ def ck_postprocess(i):
     cc['update_min']=r1[9]
     cc['update_mout']=r1[11]
     cc['overhead']=r1[13]
+    cc['avg_windows']=r1[15]
 
     return {'return':0, 'characteristics':cc}

@@ -953,7 +953,7 @@ void Train_SGNS() {
             end = omp_get_wtime();
 //            printf ("\nword_count_actual %llu, Time %lf sgemm1 %.2lf(%llu/%lf) flops, sgemm2 %.2lf(%llu/%lf) flops, sgemm3 %.2lf(%llu/%lf) flops graphTraversal+icopy1+icopy2 %.2lf(%.2lf+%.2lf+%.2lf) sec, graphConsTime %.2lf sec, fileReadTime %.2lf sec, matrixTime %.2lf oTime %.2lf + %.2lf sec \n", word_count_actual, end-start, sgemm1Fl*1E-9/sgemm1Time, sgemm1Fl, sgemm1Time, sgemm2Fl*1E-9/sgemm2Time, sgemm2Fl, sgemm2Time, sgemm3Fl*1E-9/sgemm3Time, sgemm3Fl, sgemm3Time, memcpyTime, graphTravTime, iTime1, iTime2, graphConsTime, fileReadTime, matrixTime, oTime1, oTime2);
             FILE *fpOut = fopen ("pSGNScc_time", "w");
-            fprintf (fpOut, "Elapsed %.2lf SGDTime %.2lf CreateInM %.2lf CreateOutM %.2lf UpdateMin %.2lf UpdateMout %.2lf Overhead %.2lf\n", end-start, matrixTime, iTime1, iTime2, oTime1, oTime2, memcpyTime-iTime1-iTime2 + fileReadTime + graphConsTime);
+            fprintf (fpOut, "Elapsed %.2lf SGDTime %.2lf CreateInM %.2lf CreateOutM %.2lf UpdateMin %.2lf UpdateMout %.2lf Overhead %.2lf AvgWindows %.2f\n", end-start, matrixTime, iTime1, iTime2, oTime1, oTime2, memcpyTime-iTime1-iTime2 + fileReadTime + graphConsTime, (float)numWindowsProcessed/numSteps);
             fclose (fpOut);
         }
 

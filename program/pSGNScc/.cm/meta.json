@@ -36,13 +36,6 @@
     }
   },
   "run_deps": {
-    "tool-hyperwords": {
-      "force_target_as_host": "yes",
-      "local": "yes",
-      "name": "hyperwords",
-      "sort": 30,
-      "tags": "tool,hyperwords"
-    },
     "dataset-words": {
       "force_target_as_host": "yes",
       "local": "yes",
@@ -52,18 +45,18 @@
     }
   },
   "run_vars": {
-    "CK_BATCH_SIZE": "17",
-    "CK_BINARY": "0",
-    "CK_C": "8",
+    "CK_OUTPUT": "vectors.txt",
+    "CK_SIZE": "100",
+    "CK_WINDOW": "8",
+    "CK_THREADS": "24",
     "CK_ITER": "10",
     "CK_MIN_COUNT": "5",
-    "CK_NEGATIVE": "5",
-    "CK_OUTPUT": "vectors.txt",
-    "CK_SAMPLE": "1e-4",
-    "CK_SIZE": "100",
+    "CK_BATCH_SIZE": "17",
+    "CK_C": "8",
     "CK_T": "500000",
-    "CK_THREADS": "24",
-    "CK_WINDOW": "8"
+    "CK_BINARY": "0",
+    "CK_NEGATIVE": "5",
+    "CK_SAMPLE": "1e-4"
   },
   "skip_bin_ext": "yes",
   "tags": [
