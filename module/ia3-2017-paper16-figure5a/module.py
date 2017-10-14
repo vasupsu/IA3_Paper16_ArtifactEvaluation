@@ -57,7 +57,7 @@ def run_expt(i):
     'pSGNScc' : [0, 0, 0, 0]}]
 
     cmd=json.dumps(result, indent=2)
-    ck.out (cmd)
+#    ck.out (cmd)
     o=i.get('out','') # if con, then console output
 
     ck.out('Reproducing results for Figure 5a ...')
@@ -130,23 +130,26 @@ def run_expt(i):
     for ds in datasets:
         dataset_uid=ds['data_uid']
         dataset_name=ds.get('meta',{}).get('env',{}).get('CK_ENV_DATASET_WORDSNAME','')
+        ck.out('---------------------------------------------')
+        ck.out('Run with data set: '+dataset_name+' ('+dataset_uid+')')
+        ck.out('---------------------------------------------')
         if (dataset_name=="1b" ):
             data_no = 1
         else:
             data_no = 0
         run_no = 0
         for threads in result[0]['threads']:
-#            if (threads < 16):
-#                run_no = run_no + 1
-#                continue
-            ck.out ("Threads "+str(threads))
+            if (threads < 16):
+                run_no = run_no + 1
+                continue
+#            ck.out ("Threads "+str(threads))
 
-            ck.out('')
-            ck.out('Run with data set: '+dataset_name+' ('+dataset_uid+')')
-            ck.out('')
     
             preset_deps={}
             preset_deps['dataset-words']=dataset_uid # force using this env
+            ck.out('\t------------------------------')
+            ck.out('\tRun Word2Vec using '+str(threads)+' threads')
+            ck.out('\t------------------------------')
     
 #            if (data_no==0):
             if (data_no==0):
@@ -168,9 +171,14 @@ def run_expt(i):
                 return {'return':1, 'error':'execution failed ('+ch.get('fail_reason','')+')'}
    
             result[data_no]['word2vec'][run_no] = ch.get('execution_time','')
+            if (data_no==0):
+                result[data_no]['word2vec'][run_no] = result[data_no]['word2vec'][run_no]/10
             cmd=json.dumps(ch, indent=2)
-            ck.out(cmd)
+#            ck.out(cmd)
    
+            ck.out('\n\t------------------------------')
+            ck.out('\tRun pWord2Vec using '+str(threads)+' threads')
+            ck.out('\t------------------------------')
             if (data_no==0):
                 r=ck.access({'action':'run',
                         'module_uoa':cfg['module_deps']['program'],
@@ -190,9 +198,14 @@ def run_expt(i):
                 return {'return':1, 'error':'execution failed ('+ch.get('fail_reason','')+')'}
     
             result[data_no]['pword2vec'][run_no] = ch.get('execution_time','')
+            if (data_no==0):
+                result[data_no]['pword2vec'][run_no] = result[data_no]['pword2vec'][run_no]/10
             cmd=json.dumps(ch, indent=2)
-            ck.out(cmd)
+#            ck.out(cmd)
     
+            ck.out('\n\t------------------------------')
+            ck.out('\tRun pSGNScc using '+str(threads)+' threads')
+            ck.out('\t------------------------------')
             if (data_no==0):
                 r=ck.access({'action':'run',
                         'module_uoa':cfg['module_deps']['program'],
@@ -212,12 +225,32 @@ def run_expt(i):
                 return {'return':1, 'error':'execution failed ('+ch.get('fail_reason','')+')'}
     
             cmd=json.dumps(ch, indent=2)
-            ck.out(cmd)
+#            ck.out(cmd)
             result[data_no]['pSGNScc'][run_no] = ch.get('execution_time','')
+            if (data_no==0):
+                result[data_no]['pSGNScc'][run_no] = result[data_no]['pSGNScc'][run_no]/10
     
             run_no = run_no + 1
 #        data_no = data_no + 1
     cmd=json.dumps(result, indent=2)
-    ck.out(cmd)
+#    ck.out(cmd)
+    print "\n======================================================="
+    print "              Data to verify Figure 5C"
+    print "======================================================="
+    print "text8 dataset"
+    print "============="
+    print "{:<17}\t\t{:<20}".format(' ','Number of cores')
+    print "{:<17}\t{:2d}\t{:2d}\t{:2d}\t{:2d}".format('',1,4,8,16)
+    print "{:<17}\t{:.2f}\t{:.2f}\t{:.2f}\t{:.2f}".format('Word2Vec',result[0]['word2vec'][0], result[0]['word2vec'][1], result[0]['word2vec'][2], result[0]['word2vec'][3])
+    print "{:<17}\t{:.2f}\t{:.2f}\t{:.2f}\t{:.2f}".format('pWord2Vec',result[0]['pword2vec'][0], result[0]['pword2vec'][1], result[0]['pword2vec'][2], result[0]['pword2vec'][3])
+    print "{:<17}\t{:.2f}\t{:.2f}\t{:.2f}\t{:.2f}".format('pSGNScc',result[0]['pSGNScc'][0], result[0]['pSGNScc'][1], result[0]['pSGNScc'][2], result[0]['pSGNScc'][3])
+    print "============="
+    print "1B dataset"
+    print "============="
+    print "{:<17}\t\t{:<20}".format(' ','Number of cores')
+    print "{:<17}\t{:2d}\t{:2d}\t{:2d}\t{:2d}".format('',1,4,8,16)
+    print "{:<17}\t{:.2f}\t{:.2f}\t{:.2f}\t{:.2f}".format('Word2Vec',result[1]['word2vec'][0], result[1]['word2vec'][1], result[1]['word2vec'][2], result[1]['word2vec'][3])
+    print "{:<17}\t{:.2f}\t{:.2f}\t{:.2f}\t{:.2f}".format('pWord2Vec',result[1]['pword2vec'][0], result[1]['pword2vec'][1], result[1]['pword2vec'][2], result[1]['pword2vec'][3])
+    print "{:<17}\t{:.2f}\t{:.2f}\t{:.2f}\t{:.2f}".format('pSGNScc',result[1]['pSGNScc'][0], result[1]['pSGNScc'][1], result[1]['pSGNScc'][2], result[1]['pSGNScc'][3])
 
     return {'return':0}

@@ -16,7 +16,7 @@ def ck_postprocess(i):
     deps=i['deps']
 
     cc={}
-    ck.out ('in ck_postprocess pword2vec')
+#    ck.out ('in ck_postprocess pword2vec')
     # Path to hyperwords
     ph=deps['tool-hyperwords']
     ph_env=ph.get('dict',{}).get('env',{})
@@ -24,9 +24,7 @@ def ck_postprocess(i):
     ph_path = ph_path+'/'
     vectors_file=env.get('CK_OUTPUT',{});
     if (vectors_file != "vectors.txt"):
-        if (os.path.isfile(ph_path+'hyperwords/docopt.py')):
-            ck.out ('docopt.py exists')
-        else:
+        if not (os.path.isfile(ph_path+'hyperwords/docopt.py')):
             if (os.path.isfile('../docopt.py')):
                 copyfile ('../docopt.py', ph_path+'hyperwords/docopt.py')
             else:
