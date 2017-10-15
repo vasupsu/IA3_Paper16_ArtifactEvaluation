@@ -56,7 +56,7 @@ def run_expt(i):
 #    ck.out (cmd)
     o=i.get('out','') # if con, then console output
 
-    ck.out('Reproducing results for Table 3a ...')
+    ck.out('Reproducing results for Table 3b ...')
 
     ck.out('')
     ck.out('Read program meta ...')
@@ -105,7 +105,7 @@ def run_expt(i):
         dataset_uid=ds['data_uid']
         dataset_name=ds.get('meta',{}).get('env',{}).get('CK_ENV_DATASET_WORDSNAME','')
     
-        if (dataset_name!="1b"):
+        if (dataset_name=="1b"):
             continue
         run_no = 0
         for C in result['C']:
@@ -140,11 +140,11 @@ def run_expt(i):
     print "\n==================================================="
     print "           Table 3b: Performance impact of C"
     print "==================================================="
-    print "{:<22}\t{:<30}".format('','Value of C')
-    print "{:<22}\t{:<5}\t{:<5}\t{:<5}\t{:<5}".format('','1','4','8','16')
-    print "{:<22}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}".format('Time per epoch(s)', result['execution_time'][0], result['execution_time'][1], result['execution_time'][2], result['execution_time'][3])
-    print "{:<22}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}".format('Index time(s)',result['overhead'][0], result['overhead'][1], result['overhead'][2], result['overhead'][3])
-    print "{:<22}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}".format('SGD Computations(s)',result['sgd_time'][0], result['sgd_time'][1], result['sgd_time'][2], result['sgd_time'][3])
+    print "{:<22}\t\t{:<30}".format('','Value of C')
+    print "{:<22}\t{:<7}\t{:<7}\t{:<7}\t{:<7}".format('','1','4','8','16')
+    print "{:<22}\t{:.2f}\t{:.2f}\t{:.2f}\t{:.2f}".format('Time per epoch(s)', result['execution_time'][0], result['execution_time'][1], result['execution_time'][2], result['execution_time'][3])
+    print "{:<22}\t{:.2f}\t{:.2f}\t{:.2f}\t{:.2f}".format('Index time(s)',result['overhead'][0], result['overhead'][1], result['overhead'][2], result['overhead'][3])
+    print "{:<22}\t{:.2f}\t{:.2f}\t{:.2f}\t{:.2f}".format('SGD Computations(s)',result['sgd_time'][0], result['sgd_time'][1], result['sgd_time'][2], result['sgd_time'][3])
     print ""
 
     return {'return':0}
