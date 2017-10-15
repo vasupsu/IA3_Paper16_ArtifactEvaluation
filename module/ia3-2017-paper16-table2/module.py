@@ -159,7 +159,7 @@ def run_expt(i):
             r=ck.access({'action':'run',
                     'module_uoa':cfg['module_deps']['program'],
                     'data_uoa':cfg['programs_uoa']['word2vec'],
-                    'env':{'CK_WINDOW':'5', 'CK_SIZE':'300', 'CK_THREADS':threads, 'CK_ITER':'1', 'CK_MIN_COUNT':'2', 'CK_OUTPUT':'word2vec_1b.txt'},
+                    'env':{'CK_WINDOW':'5', 'CK_SIZE':'300', 'CK_THREADS':threads, 'CK_ITER':'5', 'CK_MIN_COUNT':'2', 'CK_OUTPUT':'word2vec_1b.txt'},
                     'preset_deps':preset_deps})
         if r['return']>0: return r
 
@@ -186,7 +186,7 @@ def run_expt(i):
             r=ck.access({'action':'run',
                     'module_uoa':cfg['module_deps']['program'],
                     'data_uoa':cfg['programs_uoa']['pword2vec'],
-                    'env':{'CK_WINDOW':'5', 'CK_SIZE':'300', 'CK_THREADS':threads, 'CK_ITER':'1', 'CK_MIN_COUNT':'2', 'CK_BATCH_SIZE':'11', 'CK_OUTPUT':'pword2vec_1b.txt'},
+                    'env':{'CK_WINDOW':'5', 'CK_SIZE':'300', 'CK_THREADS':threads, 'CK_ITER':'5', 'CK_MIN_COUNT':'2', 'CK_BATCH_SIZE':'11', 'CK_OUTPUT':'pword2vec_1b.txt'},
                     'preset_deps':preset_deps})
         if r['return']>0: return r
 
@@ -213,7 +213,7 @@ def run_expt(i):
             r=ck.access({'action':'run',
                     'module_uoa':cfg['module_deps']['program'],
                     'data_uoa':cfg['programs_uoa']['pSGNScc'],
-                    'env':{'CK_WINDOW':'5', 'CK_SIZE':'300', 'CK_THREADS':threads, 'CK_ITER':'1', 'CK_MIN_COUNT':'2', 'CK_BATCH_SIZE':'11', 'CK_OUTPUT':'pSGNScc_1b.txt'},
+                    'env':{'CK_WINDOW':'5', 'CK_SIZE':'300', 'CK_THREADS':threads, 'CK_ITER':'5', 'CK_MIN_COUNT':'2', 'CK_BATCH_SIZE':'11', 'CK_OUTPUT':'pSGNScc_1b.txt'},
                     'preset_deps':preset_deps})
         if r['return']>0: return r
 

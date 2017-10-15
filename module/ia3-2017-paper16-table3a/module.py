@@ -53,7 +53,7 @@ def run_expt(i):
     'avg_wins' : [0, 0, 0, 0]}
 
     cmd=json.dumps(result, indent=2)
-    ck.out (cmd)
+#    ck.out (cmd)
     o=i.get('out','') # if con, then console output
 
     ck.out('Reproducing results for Table 3a ...')
@@ -100,26 +100,24 @@ def run_expt(i):
     if r['return']>0: return r
     datasets=r['lst']
 
-    data_no = 0
     threads=16
     for ds in datasets:
         dataset_uid=ds['data_uid']
         dataset_name=ds.get('meta',{}).get('env',{}).get('CK_ENV_DATASET_WORDSNAME','')
     
         if (dataset_name!="1b"):
-            data_no = data_no + 1
             continue
         run_no = 0
         for T in result['T']:
-            ck.out ("T "+str(T))
+#            ck.out ("T "+str(T))
 
-            ck.out('')
-            ck.out('Run with data set: '+dataset_name+' ('+dataset_uid+')')
-            ck.out('')
-    
             preset_deps={}
             preset_deps['dataset-words']=dataset_uid # force using this env
     
+            ck.out('\n\t----------------------------------------------------------')
+            ck.out('\tRunning pSGNScc using '+str(threads)+' threads, T='+str(T)+' on dataset ' + dataset_name)
+            ck.out('\t----------------------------------------------------------')
+
             r=ck.access({'action':'run',
                         'module_uoa':cfg['module_deps']['program'],
                         'data_uoa':cfg['programs_uoa']['pSGNScc'],
@@ -132,14 +130,22 @@ def run_expt(i):
                 return {'return':1, 'error':'execution failed ('+ch.get('fail_reason','')+')'}
     
             cmd=json.dumps(ch, indent=2)
-            ck.out(cmd)
+#            ck.out(cmd)
             result['execution_time'][run_no] = ch.get('execution_time','')
             result['overhead'][run_no] = ch.get('overhead','')
             result['avg_wins'][run_no] = ch.get('avg_windows','')
             run_no = run_no + 1
-        data_no = data_no + 1
 
     cmd=json.dumps(result, indent=2)
-    ck.out(cmd)
+#    ck.out(cmd)
+    print "\n==================================================="
+    print "           Table 3a: Performance impact of T"
+    print "==================================================="
+    print "{:<20}\t{:<30}".format('','Value of T')
+    print "{:<20}\t{:<5}\t{:<5}\t{:<5}\t{:<5}".format('','100K','500K','1M','2M')
+    print "{:<20}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}".format('Time per epoch(s)', result['execution_time'][0], result['execution_time'][1], result['execution_time'][2], result['execution_time'][3])
+    print "{:<20}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}".format('Index time(s)',result['overhead'][0], result['overhead'][1], result['overhead'][2], result['overhead'][3])
+    print "{:<20}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}".format('Avg. Rel Windows',result['avg_wins'][0], result['avg_wins'][1], result['avg_wins'][2], result['avg_wins'][3])
+    print ""
 
     return {'return':0}
