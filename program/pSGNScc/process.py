@@ -38,7 +38,7 @@ def ck_postprocess(i):
             token_no = 0
             for token in eval_op:
                 if (token.strip()=="pSGNScc"):
-                    cc['ws']=eval_op[token_no + 1].strip()
+                    cc['ws']=float(eval_op[token_no + 1].strip())
                 token_no = token_no + 1
             
             ret2=subprocess.Popen (['python', ph_path+'hyperwords/analogy_eval.py', 'embedding', 'pSGNScc', ph_path+'testsets/analogy/google.txt'], stdout=subprocess.PIPE)
@@ -46,9 +46,9 @@ def ck_postprocess(i):
             token_no = 0
             for token in eval_op:
                 if (token.strip()=="pSGNScc"):
-                    cc['wa']=eval_op[token_no + 1].strip()
+                    cc['wa']=float(eval_op[token_no + 1].strip())
                 token_no = token_no + 1
-            ck.out (cc['ws']+"-"+cc['wa'])
+#            ck.out (cc['ws']+"-"+cc['wa'])
 
     # Load output as list.
     r=ck.load_text_file({'text_file':'pSGNScc_time','split_to_list':'yes'})

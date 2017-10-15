@@ -57,7 +57,7 @@ def run_expt(i):
     'pSGNScc' : [0, 0]}]
 
     cmd=json.dumps(result, indent=2)
-    ck.out (cmd)
+#    ck.out (cmd)
     o=i.get('out','') # if con, then console output
 
     ck.out('Reproducing results for Table 2 ...')
@@ -130,6 +130,9 @@ def run_expt(i):
     for ds in datasets:
         dataset_uid=ds['data_uid']
         dataset_name=ds.get('meta',{}).get('env',{}).get('CK_ENV_DATASET_WORDSNAME','')
+        ck.out('\n---------------------------------------------')
+        ck.out('Run with data set: '+dataset_name+' ('+dataset_uid+')')
+        ck.out('---------------------------------------------')
         if (dataset_name=="1b" ):
             data_no = 1
 #            continue
@@ -137,16 +140,14 @@ def run_expt(i):
             data_no = 0
  
         run_no = 0
-        threads = 24
-
-        ck.out ("Threads "+str(threads))
-
-        ck.out('')
-        ck.out('Run with data set: '+dataset_name+' ('+dataset_uid+')')
-        ck.out('')
+        threads = 16
 
         preset_deps={}
         preset_deps['dataset-words']=dataset_uid # force using this env
+
+        ck.out('\n\t----------------------------------')
+        ck.out('\tRunning Word2Vec using '+str(threads)+' threads')
+        ck.out('\t----------------------------------')
 
         if (data_no==0):
             r=ck.access({'action':'run',
@@ -168,8 +169,12 @@ def run_expt(i):
 
         result[data_no]['word2vec'][0] = ch.get('ws','')
         result[data_no]['word2vec'][1] = ch.get('wa','')
-        cmd=json.dumps(ch, indent=2)
-        ck.out(cmd)
+#        cmd=json.dumps(ch, indent=2)
+#        ck.out(cmd)
+
+        ck.out('\n\t----------------------------------')
+        ck.out('\tRunning pWord2Vec using '+str(threads)+' threads')
+        ck.out('\t----------------------------------')
 
         if (data_no==0):
             r=ck.access({'action':'run',
@@ -191,8 +196,12 @@ def run_expt(i):
 
         result[data_no]['pword2vec'][0] = ch.get('ws','')
         result[data_no]['pword2vec'][1] = ch.get('wa','')
-        cmd=json.dumps(ch, indent=2)
-        ck.out(cmd)
+#        cmd=json.dumps(ch, indent=2)
+#        ck.out(cmd)
+
+        ck.out('\n\t----------------------------------')
+        ck.out('\tRunning pSGNScc using '+str(threads)+' threads')
+        ck.out('\t----------------------------------')
 
         if (data_no==0):
             r=ck.access({'action':'run',
@@ -212,13 +221,23 @@ def run_expt(i):
         if ch.get('run_success','')!='yes':
             return {'return':1, 'error':'execution failed ('+ch.get('fail_reason','')+')'}
 
-        cmd=json.dumps(ch, indent=2)
-        ck.out(cmd)
+#        cmd=json.dumps(ch, indent=2)
+#        ck.out(cmd)
         result[data_no]['pSGNScc'][0] = ch.get('ws','')
         result[data_no]['pSGNScc'][1] = ch.get('wa','')
     
 #        data_no = data_no + 1
-    cmd=json.dumps(result, indent=2)
-    ck.out(cmd)
+#    cmd=json.dumps(result, indent=2)
+#    ck.out(cmd)
+    print "\n==================================================="
+    print "           Table 2: Comparing Accuracy"
+    print "==================================================="
+    print "{:<12}\t{:<15}\t{:<15}".format('','Similarity','Analogy')
+    print "{:<12}\t{:<5}\t{:<5}\t{:<5}\t{:<5}".format('','text8','1B','text8','1B')
+    print "==================================================="
+    print "{:<12}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}".format('Word2Vec', result[0]['word2vec'][0], result[1]['word2vec'][0], result[0]['word2vec'][1], result[1]['word2vec'][1])
+    print "{:<12}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}".format('pWord2Vec',result[0]['pword2vec'][0], result[1]['pword2vec'][0], result[0]['pword2vec'][1], result[1]['pword2vec'][1])
+    print "{:<12}\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}".format('pSGNScc',result[0]['pSGNScc'][0], result[1]['pSGNScc'][0], result[0]['pSGNScc'][1], result[1]['pSGNScc'][1])
+    print ""
 
     return {'return':0}
